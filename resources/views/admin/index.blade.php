@@ -21,7 +21,7 @@
             <td>{{$post->body}}</td>
             <td>{{$post->slug}}</td>
             <td><a class='btn btn-primary' href="{{route('admin.posts.show', $post->slug)}}">view</a></td>
-            <td><a class='btn btn-primary' href="{{route('admin.posts.edit', $post->)}}">edit</a></td>
+            <td><a class='btn btn-primary' href="{{route('admin.posts.edit', $post->id)}}">edit</a></td>
             <td><form action="{{route('admin.posts.destroy', $post->id)}}" method="POST">
                 @csrf
                 @method('DELETE')

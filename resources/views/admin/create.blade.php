@@ -7,11 +7,6 @@
         <form action="{{route('admin.posts.store')}}" method="POST">
         @csrf
         @method('POST')
-        {{-- <select name="userId">
-            @foreach ($posts as $post)
-                <option value="{{$post->user_id}}">
-            @endforeach
-        </select> --}}
         <div class="form-group">
             <label for="title">title</label>
             <input type="text" name="title">

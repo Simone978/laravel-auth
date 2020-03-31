@@ -6,9 +6,21 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Post;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class PostController extends Controller
 {
+
+    private $user;
+    private $validateRules;
+
+    public function __construct(){
+        // $this->user = Auth::user();
+        $this->validateRules = [
+            'title'=>'required|string|max:255',
+            'body'=>'required|string'
+        ];
+    }
     /**
      * Display a listing of the resource.
      *
@@ -38,7 +50,22 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate($this->validateRules);
+        $thisUser = Auth::user()->id;
+        $data = $request->all();
+        $newpost = new Post;
+        $newpost->title= $data['title'];
+        $newpost->body= $data['body'];
+        $newpost->slug= Str::finish(Str::slug($newpost->title), rand(1, 1000000));
+        $newpost->user_id= $thisUser;
+
+        $saved=$newpost->save();
+        if(!$saved){
+            return redirect()->back();
+        }
+        return redirect()->route('admin.posts.show', ['post'=>$newpost]);
+        
+        
     }
 
     /**
