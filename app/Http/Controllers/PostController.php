@@ -11,4 +11,8 @@ class PostController extends Controller
         $post = Post::all();
         dd($post);
     }
+
+    public function show(Post $post){
+        
+    }
 }
