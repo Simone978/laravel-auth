@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Post;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
+use Carbon\Carbon;
 
 class PostController extends Controller
 {
@@ -86,9 +87,9 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Post $post)
+    public function edit($slug)
     {
-        
+        $post = Post::where('slug', $slug)->first();
         return view('admin.edit', compact('post'));
     }
 
@@ -99,9 +100,22 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Post $post)
     {
-        //
+        $request->validate($this->validateRules);
+        $thisUser = Auth::user()->id;
+        $data = $request->all();
+        $post = $post;
+        $post->title= $data['title'];
+        $post->body= $data['body'];
+        $post->slug= Str::finish(Str::slug($post->title), rand(1, 1000000));
+        $post->created_at= Carbon::now();
+        $post->updated_at= Carbon::now();
+        $updated=$post->update();
+        if(!$updated){
+            return redirect()->back();
+        }
+        return redirect()->route('admin.posts.show', $post->slug);
     }
 
     /**

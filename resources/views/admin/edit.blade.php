@@ -1,18 +1,24 @@
 @extends('layouts.app')
 
 @section('content')
-        <form action="{{route('admin.posts.update', $post->id)}}" method="POST">
+    <div class="container">
+
+    
+        <form action="{{route('admin.posts.update', $post)}}" method="POST">
         @csrf
         @method('PATCH')
-        {{-- <select name="userId">
-            @foreach ($posts as $post)
-                <option value="{{$post->user_id}}">
-            @endforeach
-        </select> --}}
-        <input type="text" value="{{$post->title}}">
-        <input type="text" value="{{$post->body}}">
-        <input type="text" value="{{$post->slug}}">
-        <button type= "submit">Modifica</button>
+        <div class="form-group">
+            <label for="title">title</label>
+            <input type="text" name="title" value="{{$post->title}}">
+        </div>
+        <div class="form-group">
+            <label for="body">body</label>
+            <textarea class="form-control" name="body" id="body"cols="30" rows="10"> {{$post->body}}</textarea>
+        </div>
+        {{-- <input type="hidden" name="user_id" value="{{Auth::id()}}"> --}}
         
-    </form>
+        <button class="btn btn-success" type= "submit">modifica</button>
+        
+        </form>
+    </div>  
 @endsection
