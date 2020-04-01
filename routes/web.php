@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+ 
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -29,3 +29,5 @@ Route::name("admin.")->prefix("admin")->namespace("Admin")->middleware('auth')->
 
 Route::get("/posts",'PostController@index')->name('posts');
 Route::get("/show/{slug}",'PostController@show')->name('post.show');
+Route::get("/create",'CommentController@create')->name('create');
+Route::post("/store",'CommentController@store')->name('comment.store');
