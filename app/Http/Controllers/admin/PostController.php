@@ -97,7 +97,12 @@ class PostController extends Controller
     public function edit($slug)
     {
         $post = Post::where('slug', $slug)->first();
-        return view('admin.edit', compact('post'));
+        $tags = Tag::all();
+        $data = [
+            'post'=> $post,
+            'tags'=> $tags
+        ];
+        return view('admin.edit', $data);
     }
 
     /**
@@ -136,6 +141,7 @@ class PostController extends Controller
         if(empty($post)){
             abort(404);
         }
+        $post->tags()->detach();
         $post->delete();
         return redirect()->route('admin.posts.index', compact('post'));
     }

@@ -15,7 +15,14 @@
             <label for="body">body</label>
             <textarea class="form-control" name="body" id="body"cols="30" rows="10"> {{$post->body}}</textarea>
         </div>
-        {{-- <input type="hidden" name="user_id" value="{{Auth::id()}}"> --}}
+        <div class="form-group">
+            <label for="tags">tags</label>
+            @foreach ($tags as $tag)
+            <span>{{$tag->name}}</span>
+            <input type="checkbox" name="tags[]" value="{{$tag->id}}" {{$post->tags->contains($tag->id) ? 'checked' : ''}}>  
+            @endforeach
+            
+        </div>
         
         <button class="btn btn-success" type= "submit">modifica</button>
         
