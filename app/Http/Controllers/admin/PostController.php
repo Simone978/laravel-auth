@@ -127,6 +127,10 @@ class PostController extends Controller
         if(!$updated){
             return redirect()->back();
         }
+        $tags = $data['tags'];
+        if(!empty($tags)){
+            $post->tags()->sync($tags);
+        };
         return redirect()->route('admin.posts.show', $post->slug);
     }
 
