@@ -5,6 +5,7 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Post;
+use App\Tag;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
@@ -40,7 +41,8 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('admin.create');
+        $tags = Tag::all();
+        return view('admin.create', compact('tags'));
     }
 
     /**
