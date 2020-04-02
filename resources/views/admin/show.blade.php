@@ -27,9 +27,12 @@
   <div class="tags">
     <h3>tags</h3>
     <ul>
-      @foreach ($post->tags as $tag)
-        <li>{{$tag->name}}</li>
-      @endforeach
+      @forelse ($post->tags as $tag)
+      <span>{{$tag->name}}</span>
+      <input type="checkbox" name="tags[]" value="{{$tag->id}}">  
+      @empty
+          No tag
+      @endforelse
       
     </ul>
   </div>
