@@ -28,8 +28,7 @@
     <h3>tags</h3>
     <ul>
       @forelse ($post->tags as $tag)
-      <span>{{$tag->name}}</span>
-      <input type="checkbox" name="tags[]" value="{{$tag->id}}">  
+      <li>{{$tag->name}}</li>  
       @empty
           No tag
       @endforelse

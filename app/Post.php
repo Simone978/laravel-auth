@@ -9,7 +9,8 @@ class Post extends Model
         'user_id',
         'title',
         'body',
-        'slug'
+        'slug',
+        'img_path'
     ];
     public function user(){
         return $this->hasMany('App\User');
