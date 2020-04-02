@@ -6,7 +6,7 @@
     
         <form action="{{route('admin.posts.store')}}" method="POST">
         @csrf
-        @method('POST')
+        @method("POST")
         <div class="form-group">
             <label for="title">title</label>
             <input type="text" name="title">
@@ -19,7 +19,7 @@
             <label for="tags">tags</label>
             @foreach ($tags as $tag)
             <span>{{$tag->name}}</span>
-            <input type="checkbox" name="tags[]" value="{{$tag->name}}">  
+            <input type="checkbox" name="tags[]" value="{{$tag->id}}">  
             @endforeach
             
         </div>

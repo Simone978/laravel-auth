@@ -53,6 +53,7 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
+        
         $request->validate($this->validateRules);
         $thisUser = Auth::user()->id;
         $data = $request->all();
@@ -66,6 +67,10 @@ class PostController extends Controller
         if(!$saved){
             return redirect()->back();
         }
+         $tags = $data['tags'];
+         $newpost->tags()->attach($tags);
+         
+         
         return redirect()->route('admin.posts.show', $newpost->slug);
         
         

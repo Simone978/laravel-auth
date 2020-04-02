@@ -24,5 +24,14 @@
     </tbody>
     
   </table>
+  <div class="tags">
+    <h3>tags</h3>
+    <ul>
+      @foreach ($post->tags as $tag)
+        <li>{{$tag->name}}</li>
+      @endforeach
+      
+    </ul>
+  </div>
  
 @endsection
