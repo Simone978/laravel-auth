@@ -2,6 +2,8 @@
 
 @section('content')
 
+<img src="{{asset('storage/'.$post->img_path)}}" alt="">
+
 <table class="table">   
     <thead>  
         <tr>

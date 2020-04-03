@@ -4,7 +4,7 @@
     <div class="container">
 
     
-        <form action="{{route('admin.posts.store')}}" method="POST">
+        <form action="{{route('admin.posts.store')}}" method="POST" enctype="multipart/form-data">
         @csrf
         @method("POST")
         <div class="form-group">
@@ -20,8 +20,11 @@
             @foreach ($tags as $tag)
             <span>{{$tag->name}}</span>
             <input type="checkbox" name="tags[]" value="{{$tag->id}}">  
-            @endforeach
-            
+            @endforeach  
+        </div>
+        <div class="form-group">
+            <label for="img_path">Aggiungi immagine</label>
+            <input type="file" name="img_path" accept="image/*">
         </div>
         
         <button class="btn btn-success" type= "submit">salva</button>
