@@ -7,6 +7,7 @@
         <form action="{{route('admin.posts.update', $post)}}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PATCH')
+        <img src="{{asset('storage/'.$post->img_path)}}" alt="">
         <div class="form-group">
             <label for="title">title</label>
             <input type="text" name="title" value="{{$post->title}}">
