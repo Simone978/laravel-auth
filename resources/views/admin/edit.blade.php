@@ -4,7 +4,7 @@
     <div class="container">
 
     
-        <form action="{{route('admin.posts.update', $post)}}" method="POST">
+        <form action="{{route('admin.posts.update', $post)}}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PATCH')
         <div class="form-group">
@@ -20,8 +20,11 @@
             @foreach ($tags as $tag)
             <span>{{$tag->name}}</span>
             <input type="checkbox" name="tags[]" value="{{$tag->id}}" {{$post->tags->contains($tag->id) ? 'checked' : ''}}>  
-            @endforeach
-            
+            @endforeach 
+        </div>
+        <div class="form-group">
+            <label for="img_path">Modifica o aggiungi immagine</label>
+            <input type="file" name="img_path" accept="image/*">
         </div>
         
         <button class="btn btn-success" type= "submit">modifica</button>

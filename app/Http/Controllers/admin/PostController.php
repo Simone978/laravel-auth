@@ -59,7 +59,7 @@ class PostController extends Controller
         $request->validate($this->validateRules);
         $thisUser = Auth::user()->id;
         $data = $request->all();
-        
+
         $path=Storage::disk('public')->put('images', $data['img_path']);
 
         $newpost = new Post;
@@ -123,12 +123,14 @@ class PostController extends Controller
         $request->validate($this->validateRules);
         $thisUser = Auth::user()->id;
         $data = $request->all();
+        $path=Storage::disk('public')->put('images', $data['img_path']);
         $post = $post;
         $post->title= $data['title'];
         $post->body= $data['body'];
         $post->slug= Str::finish(Str::slug($post->title), rand(1, 1000000));
         $post->created_at= Carbon::now();
         $post->updated_at= Carbon::now();
+        $post->img_path = $path;
         $updated=$post->update();
         if(!$updated){
             return redirect()->back();
